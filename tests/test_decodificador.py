@@ -36,3 +36,14 @@ def test_command_line_interface():
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
     assert '--help  Show this message and exit.' in help_result.output
+
+def test_decodificador(capsys):
+    """We use the capsys argument to capture printing to stdout."""
+    # The ingredients function prints the results, but returns nothing.
+    assert decodificador.ascii_deco("65, 115, 99, 105, 105") == None
+
+    # Capture the result of the arepas.ingredients() function call.
+    captured = capsys.readouterr()
+
+    # If we check captured, we can see that the ingredients have been printed.
+    assert "Ascii\n" in captured.out
